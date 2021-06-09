@@ -33,9 +33,9 @@ const render = () => {
       <p>{app.options.length}</p>
       <button onClick={wipeArray}>Remove All</button>
       <ol>
-        {app.options.map((input) => {
-          return <li key={input}>{input}</li>;
-        })}
+        {app.options.map((input) => (
+          <li key={input}>{input}</li>
+        ))}
       </ol>
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" />
