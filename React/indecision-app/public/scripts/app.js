@@ -1,41 +1,94 @@
 "use strict";
 
-// arguments object - no longer bound with arrow functions
+console.log("app.js is running");
 
-var add = function add(a, b) {
-  // console.log(arguments); doesn't work with the arrow function
-  return a + b;
+var app = {
+  title: "Indecision App",
+  subtitle: "This is some info",
+  options: ["One", "Two"]
 };
 
-console.log(add(55, 1));
+var template = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    "p",
+    null,
+    app.subtitle
+  ),
+  React.createElement(
+    "p",
+    null,
+    app.options.length > 0 ? "Here are your options" : "No options"
+  ),
+  React.createElement(
+    "ol",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "Item one"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "Item two"
+    )
+  )
+);
 
-// this keyword - no longer bound
-
-var user = {
-  name: "Nagehan",
-  cities: ["Kocaeli", "Istanbul", "Eindhoven"],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    // printPlacesLived function is not work if it is arrow function, because it can't find cities in that case
-    return this.cities.map(function (city) {
-      return _this.name + " has lived in " + city;
-    });
-    // map is not work if its anonymous function, because it can't find name in that case
-  }
+var count = 0;
+var addOne = function addOne() {
+  count++;
+  renderCounterApp();
 };
 
-console.log(user.printPlacesLived());
-
-var multiplier = {
-  arrayOfNumbers: [1, 2, 3],
-  multiplyBy: 2,
-  multiply: function multiply() {
-    var _this2 = this;
-
-    return this.arrayOfNumbers.map(function (number) {
-      return number * _this2.multiplyBy;
-    });
-  }
+var minusOne = function minusOne() {
+  count--;
+  renderCounterApp();
 };
-console.log(multiplier.multiply());
+
+var reset = function reset() {
+  count = 0;
+  renderCounterApp();
+};
+
+var appRoot = document.getElementById("app");
+
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    "div",
+    null,
+    React.createElement(
+      "h1",
+      null,
+      "Count: ",
+      count
+    ),
+    React.createElement(
+      "button",
+      { onClick: addOne },
+      "+1"
+    ),
+    " ",
+    React.createElement(
+      "button",
+      { onClick: minusOne },
+      "-1"
+    ),
+    " ",
+    React.createElement(
+      "button",
+      { onClick: reset },
+      "Reset"
+    )
+  );
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
