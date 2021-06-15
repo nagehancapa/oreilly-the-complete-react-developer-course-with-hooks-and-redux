@@ -1,5 +1,5 @@
-import isSenior, { isAdult, canDrink } from "./person";
+import React from "react";
+import ReactDOM from "react-dom";
 
-console.log(isAdult(17));
-console.log(canDrink(20));
-console.log(isSenior(65));
+const template = React.createElement("p", {}, "testing 123");
+ReactDOM.render(template, document.getElementById("app"));
