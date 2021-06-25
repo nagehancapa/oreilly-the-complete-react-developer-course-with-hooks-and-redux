@@ -1,4 +1,3 @@
-import { test } from "@jest/globals";
 import expensesReducer from "../../reducers/expenses";
 import expenses from "../fixtures/expenses";
 
