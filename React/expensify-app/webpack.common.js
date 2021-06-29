@@ -1,13 +1,28 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/app.js",
+  entry: {
+    app: "./src/app.js",
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Expensify",
+      template: "./src/index.html",
+    }),
+  ],
   output: {
     path: path.join(__dirname, "public"),
     filename: "bundle.js",
+    clean: true,
   },
   module: {
     rules: [
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
       {
         loader: "babel-loader",
         test: /\.js$/,
@@ -19,10 +34,4 @@ module.exports = {
       },
     ],
   },
-  devtool: "eval-cheap-module-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    historyApiFallback: true,
-  },
-  mode: "development",
 };
