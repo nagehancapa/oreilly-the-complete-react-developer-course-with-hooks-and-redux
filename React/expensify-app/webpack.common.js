@@ -1,6 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   entry: {
@@ -11,6 +14,9 @@ module.exports = {
       title: "Expensify",
       template: "./src/index.html",
     }),
+    // [].concat(devMode ? [] : [new MiniCssExtractPlugin({
+    //   filename: "styles.css"
+    // })]),
   ],
   output: {
     path: path.join(__dirname, "public"),
@@ -30,6 +36,11 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
+        // use: [
+        //   devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+        //   "css-loader",
+        //   "sass-loader",
+        // ],
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
