@@ -15,30 +15,40 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-// database
-//   .ref()
-//   .set({
-//     name: "nagehan capa",
-//     age: 33,
-//     isSingle: false,
-//     location: {
-//       city: "Eindhoven",
-//       country: "Netherlands",
-//     },
-//   })
-//   .then(() => {
-//     console.log("Data is saved!");
-//   })
-//   .catch((e) => {
-//     console.log("This failed.", e);
-//   });
-
 database
-  .ref("isSingle")
-  .remove()
-  .then(() => {
-    console.log("Remove succeeded.");
+  .ref()
+  .set({
+    name: "nagehan capa",
+    age: 33,
+    stressLevel: 6,
+    job: {
+      title: "Software developer",
+      company: "Google",
+    },
+    location: {
+      city: "Eindhoven",
+      country: "Netherlands",
+    },
   })
-  .catch((error) => {
-    console.log("Remove failed: " + error.message);
+  .then(() => {
+    console.log("Data is saved!");
+  })
+  .catch((e) => {
+    console.log("This failed.", e);
   });
+
+database.ref().update({
+  stressLevel: 9,
+  "job/company": "Amazon",
+  "location/city": "Seattle",
+});
+
+// database
+//   .ref("isSingle")
+//   .remove()
+//   .then(() => {
+//     console.log("Remove succeeded.");
+//   })
+//   .catch((error) => {
+//     console.log("Remove failed: " + error.message);
+//   });
