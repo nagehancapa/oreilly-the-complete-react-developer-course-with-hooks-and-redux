@@ -15,33 +15,49 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database
-  .ref()
-  .set({
-    name: "nagehan capa",
-    age: 33,
-    stressLevel: 6,
-    job: {
-      title: "Software developer",
-      company: "Google",
-    },
-    location: {
-      city: "Eindhoven",
-      country: "Netherlands",
-    },
-  })
-  .then(() => {
-    console.log("Data is saved!");
-  })
-  .catch((e) => {
-    console.log("This failed.", e);
-  });
-
-database.ref().update({
-  stressLevel: 9,
-  "job/company": "Amazon",
-  "location/city": "Seattle",
+database.ref().on("value", (snapshot) => {
+  const val = snapshot.val();
+  console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
 });
+
+// database
+//   .ref()
+//   .once("value")
+//   .then((snapshot) => {
+//     const val = snapshot.val();
+//     console.log(val);
+//   })
+//   .catch((e) => {
+//     console.log("Error fetching data", e);
+//   });
+
+// database
+//   .ref()
+//   .set({
+//     name: "nagehan capa",
+//     age: 33,
+//     stressLevel: 6,
+//     job: {
+//       title: "Software developer",
+//       company: "Google",
+//     },
+//     location: {
+//       city: "Eindhoven",
+//       country: "Netherlands",
+//     },
+//   })
+//   .then(() => {
+//     console.log("Data is saved!");
+//   })
+//   .catch((e) => {
+//     console.log("This failed.", e);
+//   });
+
+// database.ref().update({
+//   stressLevel: 9,
+//   "job/company": "Amazon",
+//   "location/city": "Seattle",
+// });
 
 // database
 //   .ref("isSingle")
