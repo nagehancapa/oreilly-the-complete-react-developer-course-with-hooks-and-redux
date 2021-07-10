@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { ExpensesSummary } from "../../components/ExpensesSummary";
-import { expect } from "@jest/globals";
 
 test("should correctly render ExpensesSummary with 1 expense", () => {
   const wrapper = shallow(
