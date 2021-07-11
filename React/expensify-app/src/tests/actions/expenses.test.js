@@ -6,10 +6,10 @@ import {
   editExpense,
   removeExpense,
   setExpenses,
+  startSetExpenses,
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import database from "../../firebase/firebase";
-import { expect } from "@jest/globals";
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -110,5 +110,17 @@ test("should setup remove expense action object", () => {
   expect(action).toEqual({
     type: "REMOVE_EXPENSE",
     id: "123abc",
+  });
+});
+
+test("should fetch the expenses from firebase", (done) => {
+  const store = createMockStore({});
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "SET_EXPENSES",
+      expenses,
+    });
+    done();
   });
 });
