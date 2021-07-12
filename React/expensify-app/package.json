@@ -26,6 +26,7 @@
     "enzyme-to-json": "^3.6.2",
     "express": "^4.17.1",
     "firebase": "^8.6.8",
+    "history": "4.10.1",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.0.5",

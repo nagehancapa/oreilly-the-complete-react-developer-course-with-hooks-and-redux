@@ -52,9 +52,15 @@ module.exports = {
     }),
   ],
   output: {
-    path: path.join(__dirname, "public"),
+    path: path.join(__dirname, "public", "dist"),
     filename: "bundle.js",
-    clean: true,
+    // clean: true,
+
+    // path: path.join(__dirname, 'public', 'resources'),
+    // filename: 'js/bundle.js'
+
+    // path: path.join(__dirname, 'public', 'dist'),
+    // filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -77,5 +83,10 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "public"),
+    historyApiFallback: true,
+    publicPath: "/dist/",
   },
 };
